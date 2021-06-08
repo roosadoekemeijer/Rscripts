@@ -1,4 +1,4 @@
-set_wd_easy <- function(dir) {
+setwd_ez <- function(dir) {
   ## Find the full path to a directory to set 
   ## the working directory
   ## Input:  ...
@@ -7,6 +7,11 @@ set_wd_easy <- function(dir) {
   oldwd <- getwd()
   
   dir.steps <- strsplit(dir, "/")[[1]]
+  
+  # if the drive is given, just set wd traditionally
+  if(str_detect(dir.steps[1],":")){setwd(dir); return(invisible())}
+  
+  # else if only a subfolder is given, look for the folder on the current drive
   goal <- tail(dir.steps,1)
   while (length(dir.steps)) {
     dir.step <- dir.steps[1]
@@ -20,13 +25,13 @@ set_wd_easy <- function(dir) {
       if (any(dirs.end %in% dir.steps)) {
         cur.step <- dirs.end[dirs.end %in% dir.steps][[1]]
         while (dir.step != cur.step){
-          cat("\nFound directory ", dir.step)
+          #cat("\nFound directory ", dir.step)
           dir.steps <- dir.steps[-1]
           dir.step <- dir.steps[1]
         }
         newwd <- dir.found[dirs.end %in% dir.steps]
         setwd(newwd)
-        cat("\nFound directory ", dir.step)
+        #cat("\nFound directory ", dir.step)
         if (any(dirs.end == goal)) {
           cat("\n\nSet working directory to ", getwd())
           return(invisible(getwd()))}
