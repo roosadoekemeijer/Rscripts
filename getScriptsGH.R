@@ -11,14 +11,16 @@ getScriptsGH <- function(files="ALL",
     "https://api.github.com/repos/",GH['user'],"/",GH['repos'],
     "/git/trees/", GH['branch'],"?recursive=1")))$tree,"[", "path"))
   
-  if(files=="ALL") {files=GHfiles}
+  if(any(files=="ALL")) {files<-GHfiles}
   
-  for(f in GHfiles) {
+  ls <- ls()
+  for(f in files) {
     con <- curl(paste0(
       "https://raw.githubusercontent.com/",
       GH['user'],"/",GH['repos'],"/",GH['branch'],"/",f))
     eval(parse(text = readLines(con)))
     close(con)
   }
-  
+  loaded_f <- setdiff(ls(),ls)
+  for (f in loaded_f) assign(f,get(f),envir = .GlobalEnv)
 }
