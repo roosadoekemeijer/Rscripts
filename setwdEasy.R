@@ -43,7 +43,6 @@ setwd_ez <- function(dir) {
         #cat("\nFound directory ", dir.step)
         if (any(dirs.end == goal)) {
           #cat("\n\nSet working directory to ", getwd())
-          cat("Done\n")
           return(invisible(getwd()))}
         dir.steps <- dir.steps[-1]
       }
