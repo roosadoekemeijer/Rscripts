@@ -3,6 +3,7 @@ setwd_ez <- function(dir) {
   ## the working directory
   ## Input:  ...
   ## Returns: ...
+  library(stringr)
   
   oldwd <- getwd()
   
@@ -10,6 +11,14 @@ setwd_ez <- function(dir) {
   
   # if the drive is given, just set wd traditionally
   if(str_detect(dir.steps[1],":")){setwd(dir); return(invisible())}
+  
+  # if possible, set wd to first directory first
+  if(length(dir.steps)>1) {
+    tryCatch(
+      setwd_ez(dir.steps[1]), 
+      error=function(e){print(paste0("Could not set wd to ",dir.steps[1]))}
+    )
+  }
   
   # else if only a subfolder is given, look for the folder on the current drive
   goal <- tail(dir.steps,1)
@@ -33,7 +42,7 @@ setwd_ez <- function(dir) {
         setwd(newwd)
         #cat("\nFound directory ", dir.step)
         if (any(dirs.end == goal)) {
-          cat("\n\nSet working directory to ", getwd())
+          #cat("\n\nSet working directory to ", getwd())
           return(invisible(getwd()))}
         dir.steps <- dir.steps[-1]
       }
@@ -42,11 +51,11 @@ setwd_ez <- function(dir) {
         if (dirs.end == goal) {
           cat("\n\nAlready at ", getwd())
           return(invisible(getwd()))}
-        cat("\nNo relevant subdirectories for ", dirs.end)
+        #cat("\nNo relevant subdirectories for ", dirs.end)
         setwd('../')}
     }
     else {
-      cat("\nNo directory \t", dir.step, " in ", curwd)
+      #cat("\nNo directory \t", dir.step, " in ", curwd)
       setwd('../')
       if (length(strsplit(getwd(), "/")[[1]]) == 1) {
         break
