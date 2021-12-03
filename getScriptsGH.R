@@ -1,4 +1,4 @@
-getScriptsGH <- function(files="ALL", 
+get.myGHscripts <- function(files="ALL", 
                          GH=c("user"="roosadoekemeijer",
                            "repos"="Rscripts",
                            "branch"="master")){
