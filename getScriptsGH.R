@@ -7,6 +7,8 @@ get.myGHscripts <- function(files="ALL",
   ##         GH details (username, repository, and branch)
   ## Returns: NA
   
+  if(!require(httr)){install.packages("httr");library(httr)}
+  
   GHfiles <- unlist(lapply(content(GET(paste0(
     "https://api.github.com/repos/",GH['user'],"/",GH['repos'],
     "/git/trees/", GH['branch'],"?recursive=1")))$tree,"[", "path"))
