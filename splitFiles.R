@@ -21,7 +21,8 @@ split_file  <- function(path, filename, split_indicator, sep = "\t") {
   # SET-UP: Open connection to source and output file
   if (filename == "NA") {return()}
   wd <- getwd()
-  setwd (path); s = 1 # split number
+  #setwd (path); 
+  s = 1 # split number
   sfilename = strsplit(filename, "[.]")[[1]][1]
   extention = paste0(".", strsplit(filename, "[.]")[[1]][2])
   sourcefile = file(paste0(path, "/", filename), "r")

@@ -30,7 +30,7 @@ get_data <- function(path, filepattern, ignorepattern = NA, sep="\t",
   log_files <- list(); n=0
   for (i in dir_list) {
     log_file <- paste0 (i, "/", list.files(i, pattern = filepattern))
-    log_file <- log_file[grep(ignorepattern, log_file, invert = T)]
+    if (!is.na(ignorepattern)) {log_file <- log_file[grep(ignorepattern, log_file, invert = T)]}
     if(length(log_file) > 2) {n=n+1}#;cat("\n", i, " has ", length(log_file)-2, " additional data set(s)!")}
     log_files <- append(log_files, tail(log_file,1))
   }#for
