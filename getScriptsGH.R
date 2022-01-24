@@ -25,5 +25,6 @@ get.myGHscripts <- function(files="ALL",
   }
   loaded_f <- setdiff(ls(),ls)
   for (f in loaded_f) assign(f,get(f),envir = .GlobalEnv)
-  rm(ls,f,con)
+  
+  rm(ls,f,con,envir = .GlobalEnv)
 }
