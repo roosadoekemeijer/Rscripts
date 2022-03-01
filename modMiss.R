@@ -1,5 +1,7 @@
-mod_miss <- function(df, miss.curr = NA, miss.des = "-999",
-                     miss.lim = 9999, verbose = F) {
+mod_miss <- function(
+  df, 
+  miss.curr = NA, miss.des = "-999",
+  miss.lim = 9999, verbose = F) {
   # Relabels [miss.cur] as [miss.des], removes 'completely' empty lines
   # (i.e., rows that exceed miss.lim)
   # Input:  df = data w/ missings; miss.cur = current label of missings;
@@ -39,3 +41,4 @@ mod_miss <- function(df, miss.curr = NA, miss.des = "-999",
   return(df.nna)
   
 }
+

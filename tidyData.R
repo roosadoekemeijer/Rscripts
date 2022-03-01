@@ -1,5 +1,7 @@
-tidy_data<- function(data, missing_label = "undefined", 
-                     save = F) {
+tidy_data<- function(
+  data, 
+  missing_label = "undefined", 
+  save = F) {
   # Splits data into constants (demographics) and trial data
   # Input:  data = df; missing_label = how missings are defined;
   #         save = store the splitted data sets?
@@ -94,3 +96,4 @@ tidy_data<- function(data, missing_label = "undefined",
   return(list('trials' = data.task,
               'pinfo' = data.demo))                 
 }
+
