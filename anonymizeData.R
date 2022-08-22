@@ -29,5 +29,3 @@ anonymize_data <- function (dir_list, pID_col=1, change_filename = T) {
     }#for file
   }#for dir
 }#function
-
-anonymize_data(dir_list)
